@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Atualização</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .metric-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Cores inspiradas no site ICI */
+        .metric-card.card-1::before {
+            background: linear-gradient(90deg, #1e90ff, #00bfff);
+        }
+
+        .metric-card.card-1 {
+            border-color: #1e90ff;
+        }
+
+        .metric-card.card-2::before {
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+        }
+
+        .metric-card.card-2 {
+            border-color: #ff6b35;
+        }
+
+        .metric-card.card-3::before {
+            background: linear-gradient(90deg, #00c896, #1abc9c);
+        }
+
+        .metric-card.card-3 {
+            border-color: #00c896;
+        }
+
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .metric-value {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-card.card-1 .metric-value {
+            background: linear-gradient(135deg, #1e90ff 0%, #00bfff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-card.card-2 .metric-value {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-card.card-3 .metric-value {
+            background: linear-gradient(135deg, #00c896 0%, #1abc9c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-subtitle {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-top: 40px;
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 5px solid #1e90ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item-value {
+            font-size: 1.6rem;
+            color: #2c3e50;
+            font-weight: 800;
+        }
+
+        .footer {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 60px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .footer-time {
+            color: #1e90ff;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .metric-value {
+                font-size: 2.5rem;
+            }
+
+            .metrics-grid {
+                gap: 20px;
+            }
+
+            .metric-card {
+                padding: 25px;
+            }
+
+            .info-section {
+                padding: 25px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 1.2rem;
+            padding: 40px;
+        }
+
+        .error {
+            background: #e74c3c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Update Windows 11</h1>
+        </header>
+
+        <div class="metrics-grid" id="metricsContainer">
+            <div class="loading">Carregando dados...</div>
+        </div>
+
+        <div class="info-section" id="infoContainer" style="display: none;">
+            <h2>Resumo Completo</h2>
+            <div class="info-grid" id="infoGrid"></div>
+        </div>
+
+        <div class="footer">
+            <p>Dashboard atualizado em <span class="footer-time" id="updateTime"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // Dados das métricas (você pode substituir por uma chamada AJAX se preferir)
+        const metricsData = {
+    "Windows Atualizado": 107,
+    "Update W11 + ByPass TPM 2.0": 194,
+    "Hardware": 58,
+    "Outros (Licen\u00e7a + Gabinete + Hardware)": 41,
+    "Total de Registros Analisados": 418
+};
+
+        // Mapeamento de nomes para exibição
+        const displayNames = {
+            "Windows Atualizado": "Equipamentos Atualizados",
+            "Update W11 + ByPass TPM 2.0": "Atualizações Pendentes",
+            "Hardware": "Hardware"
+        };
+
+        function initDashboard() {
+            const metricsContainer = document.getElementById('metricsContainer');
+            const infoContainer = document.getElementById('infoContainer');
+            const infoGrid = document.getElementById('infoGrid');
+
+            // Limpar o container
+            metricsContainer.innerHTML = '';
+
+            // Criar cards para as três métricas principais
+            const mainMetrics = [
+                { key: 'Windows Atualizado', class: 'card-1', icon: '🖥️' },
+                { key: 'Update W11 + ByPass TPM 2.0', class: 'card-2', icon: '⚙️' },
+                { key: 'Hardware', class: 'card-3', icon: '🛠️' }
+            ];
+
+            mainMetrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = `metric-card ${metric.class}`;
+                const displayName = displayNames[metric.key] || metric.key;
+                card.innerHTML = `
+                    <span class="metric-icon">${metric.icon}</span>
+                    <div class="metric-label">${displayName}</div>
+                    <div class="metric-value">${metricsData[metric.key].toLocaleString('pt-BR')}</div>
+                    <div class="metric-subtitle">equipamentos</div>
+                `;
+                metricsContainer.appendChild(card);
+            });
+
+            // Criar seção de informações adicionais
+            infoGrid.innerHTML = '';
+            Object.entries(metricsData).forEach(([key, value]) => {
+                const displayName = displayNames[key] || key;
+                const item = document.createElement('div');
+                item.className = 'info-item';
+                item.innerHTML = `
+                    <div class="info-item-label">${displayName}</div>
+                    <div class="info-item-value">${value.toLocaleString('pt-BR')}</div>
+                `;
+                infoGrid.appendChild(item);
+            });
+
+            infoContainer.style.display = 'block';
+
+            // Atualizar hora
+            const now = new Date();
+            document.getElementById('updateTime').textContent = now.toLocaleString('pt-BR');
+        }
+
+        // Inicializar o dashboard quando a página carregar
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>
