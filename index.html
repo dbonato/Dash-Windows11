@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="refresh" content="10">
     <title>Dashboard de Atualização</title>
     <style>
         * {
@@ -94,11 +95,11 @@
         }
 
         .metric-card.card-3::before {
-            background: linear-gradient(90deg, #00c896, #1abc9c);
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
         }
 
         .metric-card.card-3 {
-            border-color: #00c896;
+            border-color: #ff6b35;
         }
 
         .metric-icon {
@@ -142,7 +143,7 @@
         }
 
         .metric-card.card-3 .metric-value {
-            background: linear-gradient(135deg, #00c896 0%, #1abc9c 100%);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -279,18 +280,17 @@
     <script>
         // Dados das métricas (você pode substituir por uma chamada AJAX se preferir)
         const metricsData = {
-    "Windows Atualizado": 107,
-    "Update W11 + ByPass TPM 2.0": 194,
-    "Hardware": 58,
-    "Outros (Licen\u00e7a + Gabinete + Hardware)": 41,
-    "Total de Registros Analisados": 418
+    "Windows Atualizado": 163,
+    "Update W11 + ByPass TPM 2.0": 143,
+    "Hardware": 57,
+    "Outros (Licen\u00e7a + Gabinete + Hardware)": 41
 };
 
         // Mapeamento de nomes para exibição
         const displayNames = {
             "Windows Atualizado": "Equipamentos Atualizados",
             "Update W11 + ByPass TPM 2.0": "Atualizações Pendentes",
-            "Hardware": "Hardware"
+            "Hardware": "Atualizações Pendentes - Hardware"
         };
 
         function initDashboard() {
